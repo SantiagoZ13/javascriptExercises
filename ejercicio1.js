@@ -71,13 +71,10 @@ const transactions = [
 const filterByCategory = category => transaction => transaction.category === category
 
 const filterByDate = (fechaInicio, fechaFinal) => transaction =>{
-  const fechaInicioDate = new Date(fechaInicio);
-  const fechaFinalDate = new Date(fechaFinal);
-  const timeStampStart = fechaInicioDate.getTime()
-  const timeStampEnd = fechaFinalDate.getTime()
-  const transactionDate = new Date(transaction.time)
-  const transactionTimestamp = transactionDate.getTime()
-  return ((transactionTimestamp >= timeStampStart) && (transactionTimestamp <= timeStampEnd)) 
+  const startDateTimestamp = new Date(fechaInicio).getTime()
+  const endDateTimestamp = new Date(fechaFinal).getTime()
+  const transactionDateTimestamp = new Date(transaction.time).getTime()
+  return ((transactionDateTimestamp >= startDateTimestamp) && (transactionDateTimestamp <= endDateTimestamp )) 
 };
 
 const showJustTransactionsPrices = transaction => transaction.amount 
