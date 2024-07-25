@@ -70,9 +70,13 @@ const transactions = [
 
 const filterByCategory = category => transaction => transaction.category === category
 
+const TWENTY_THREE_HOURS_IN_MS = 23 * 60 * 60 * 1000
+const FIFTY_NINE_MINUTES_IN_MS = 59 * 60 * 1000
+const FIFTY_NINE_SECONDS_IN_MS = 59 * 1000
+
 const filterByDate = (fechaInicio, fechaFinal) => transaction =>{
   const startDateTimestamp = new Date(fechaInicio).getTime()
-  const endDateTimestamp = new Date(fechaFinal).getTime()
+  const endDateTimestamp = new Date(fechaFinal).getTime() + TWENTY_THREE_HOURS_IN_MS + FIFTY_NINE_MINUTES_IN_MS + FIFTY_NINE_SECONDS_IN_MS // Esto es para añadir 23 horas, 59 minutos restantes al dia seleccionado del fin del rango
   const transactionDateTimestamp = new Date(transaction.time).getTime()
   return ((transactionDateTimestamp >= startDateTimestamp) && (transactionDateTimestamp <= endDateTimestamp )) 
 };
