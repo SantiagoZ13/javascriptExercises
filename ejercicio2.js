@@ -6,61 +6,7 @@
 // Ejemplo:
 
 const exampleOutput = [
-    [
-      {
-        id: 1,
-        sourceAccount: "A",
-        targetAccount: "B",
-        amount: 100,
-        category: "eating_out",
-        time: "2018-03-02T10:33:00.000Z",
-      },
-      {
-        id: 2,
-        sourceAccount: "A",
-        targetAccount: "B",
-        amount: 100,
-        category: "eating_out",
-        time: "2018-03-02T10:33:50.000Z",
-      },
-      {
-        id: 3,
-        sourceAccount: "A",
-        targetAccount: "B",
-        amount: 100,
-        category: "eating_out",
-        time: "2018-03-02T10:34:30.000Z",
-      },
-    ],
-    [
-      {
-        id: 5,
-        sourceAccount: "A",
-        targetAccount: "C",
-        amount: 250,
-        category: "other",
-        time: "2018-03-02T10:33:00.000Z",
-      },
-      {
-        id: 6,
-        sourceAccount: "A",
-        targetAccount: "C",
-        amount: 250,
-        category: "other",
-        time: "2018-03-02T10:33:05.000Z",
-      },
-    ],
-  ];
-  
-  const transactions = [
-    {
-      id: 3,
-      sourceAccount: "A",
-      targetAccount: "B",
-      amount: 100,
-      category: "eating_out",
-      time: "2018-03-02T10:34:30.000Z",
-    },
+  [
     {
       id: 1,
       sourceAccount: "A",
@@ -68,22 +14,6 @@ const exampleOutput = [
       amount: 100,
       category: "eating_out",
       time: "2018-03-02T10:33:00.000Z",
-    },
-    {
-      id: 6,
-      sourceAccount: "A",
-      targetAccount: "C",
-      amount: 250,
-      category: "other",
-      time: "2018-03-02T10:33:05.000Z",
-    },
-    {
-      id: 4,
-      sourceAccount: "A",
-      targetAccount: "B",
-      amount: 100,
-      category: "eating_out",
-      time: "2018-03-02T10:36:00.000Z",
     },
     {
       id: 2,
@@ -94,6 +24,16 @@ const exampleOutput = [
       time: "2018-03-02T10:33:50.000Z",
     },
     {
+      id: 3,
+      sourceAccount: "A",
+      targetAccount: "B",
+      amount: 100,
+      category: "eating_out",
+      time: "2018-03-02T10:34:30.000Z",
+    },
+  ],
+  [
+    {
       id: 5,
       sourceAccount: "A",
       targetAccount: "C",
@@ -101,4 +41,84 @@ const exampleOutput = [
       category: "other",
       time: "2018-03-02T10:33:00.000Z",
     },
-  ];
+    {
+      id: 6,
+      sourceAccount: "A",
+      targetAccount: "C",
+      amount: 250,
+      category: "other",
+      time: "2018-03-02T10:33:05.000Z",
+    },
+  ],
+];
+
+const transactions = [
+  {
+    id: 3,
+    sourceAccount: "A",
+    targetAccount: "B",
+    amount: 100,
+    category: "eating_out",
+    time: "2018-03-02T10:34:30.000Z",
+  },
+  {
+    id: 1,
+    sourceAccount: "A",
+    targetAccount: "B",
+    amount: 100,
+    category: "eating_out",
+    time: "2018-03-02T10:33:00.000Z",
+  },
+  {
+    id: 6,
+    sourceAccount: "A",
+    targetAccount: "C",
+    amount: 250,
+    category: "other",
+    time: "2018-03-02T10:33:05.000Z",
+  },
+  {
+    id: 4,
+    sourceAccount: "A",
+    targetAccount: "B",
+    amount: 100,
+    category: "eating_out",
+    time: "2018-03-02T10:36:00.000Z",
+  },
+  {
+    id: 2,
+    sourceAccount: "A",
+    targetAccount: "B",
+    amount: 100,
+    category: "eating_out",
+    time: "2018-03-02T10:33:50.000Z",
+  },
+  {
+    id: 5,
+    sourceAccount: "A",
+    targetAccount: "C",
+    amount: 250,
+    category: "other",
+    time: "2018-03-02T10:33:00.000Z",
+  },
+];
+
+const filteredTransition = transactions.filter((transaction, position, transactions) =>{
+  let isTrue = false;
+
+  for(let i = 0; i < transactions.length; i++){
+    let iterableTransaction = transactions[i]
+
+    if(position == i){
+      continue;
+    }
+    else if(
+      transaction.targetAccount === iterableTransaction.targetAccount){
+      isTrue = true
+    }
+    console.log("Actual: ", transaction.id, " ",  transaction.sourceAccount, " ", transaction.targetAccount)
+    console.log("ITERABLE:", iterableTransaction.id, " ",  iterableTransaction.sourceAccount, " ", iterableTransaction.targetAccount)
+    console.log(isTrue)
+  }
+  return isTrue;
+})
