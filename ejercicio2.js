@@ -103,22 +103,43 @@ const transactions = [
   },
 ];
 
-const filteredTransition = transactions.filter((transaction, position, transactions) =>{
-  let isTrue = false;
+const sortedTransactions = transactions.sort((a, b) => new Date(a.time) - new Date(b.time))
 
-  for(let i = 0; i < transactions.length; i++){
-    let iterableTransaction = transactions[i]
+const groups = {}
 
-    if(position == i){
-      continue;
-    }
-    else if(
-      transaction.targetAccount === iterableTransaction.targetAccount){
-      isTrue = true
-    }
-    console.log("Actual: ", transaction.id, " ",  transaction.sourceAccount, " ", transaction.targetAccount)
-    console.log("ITERABLE:", iterableTransaction.id, " ",  iterableTransaction.sourceAccount, " ", iterableTransaction.targetAccount)
-    console.log(isTrue)
+sortedTransactions.forEach(transaction =>{
+
+  const {sourceAccount, targetAccount, amount, category, time} = transaction
+  const key = `${sourceAccount}-${targetAccount}-${amount}-${category}`
+
+  if(!groups[key]){
+    groups[key] = [[]]
   }
-  return isTrue;
+  
+  let added = false
+
+  for(let group of groups[key]){
+    let canAdd = true
+
+    for(let existingTransaction of group){
+      const timeDiff = (new Date(time) - new Date(existingTransaction)) / 1000
+      if (timeDiff > 60){
+        canAdd = false
+        break
+      }
+    }
+    if(canAdd){
+      group.push(transaction);
+      added = true
+      break
+    }
+  }
+  if(!added){
+    groups[key].push([transaction])
+  }
+
 })
+
+const result = Object.values(groups).flat()
+
+console.log(result)
