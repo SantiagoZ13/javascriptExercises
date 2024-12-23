@@ -27,5 +27,31 @@
         </div>
       </div>
     </div>
+    <div class="message-container">
+      <p>
+        Welcome to Hunter Dragon. You must defeat the dragon that is preventing
+        people from leaving the town.
+      </p>
+    </div>
+    <form class="form-stats-container">
+      <p>
+        Before embarking on this journey, you must choose a name and a class
+        that will define your skills and your path. Here are some options:
+      </p>
+      <input
+        type="text"
+        class="player-name"
+        required
+        placeholder="Select a  name"
+      />
+      <select class="player-class" required>
+        <option value="">Select a class</option>
+        <option value="warrior">Warrior</option>
+        <option value="archer">Archer</option>
+        <option value="mage">Mage</option>
+      </select>
+      <button type="button" class="btn-start">Start the travel</button>
+    </form>
+    <script src="script.js"></script>
   </body>
 </html>
