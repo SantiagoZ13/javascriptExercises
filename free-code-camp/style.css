@@ -20,6 +20,16 @@ body {
   );
 }
 
+/* Settings icon*/
+.settings-button {
+  width: 64px;
+  place-self: flex-end;
+  cursor: pointer;
+  margin-right: 64px;
+}
+.settings-button img {
+  width: 100%;
+}
 /* Form player name and class */
 .form-stats-container {
   color: aliceblue;
