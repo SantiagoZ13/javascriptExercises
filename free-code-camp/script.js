@@ -1,5 +1,6 @@
-const playerName = document.querySelector(".player-name");
-const playerClass = document.querySelector(".player-class");
+let playerName = document.querySelector(".player-name");
+let playerClass = document.querySelector(".player-class");
+let languageSelected = document.querySelector(".language");
 const btnStart = document.querySelector(".btn-start");
 
 const messageContainer = document.querySelector(".message-container");
