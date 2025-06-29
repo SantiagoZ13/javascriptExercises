@@ -2,13 +2,13 @@ let playerName = document.querySelector(".player-name");
 let playerClass = document.querySelector(".player-class");
 const btnStart = document.querySelector(".btn-start");
 
-const messageContainer = document.querySelector(".message-container");
+let messageContainer = document.querySelector(".message-container");
 const formContainer = document.querySelector(".form-stats-container");
 const gameContainer = document.querySelector(".game-container");
 
-const btn1 = document.querySelector(".button1");
-const btn2 = document.querySelector(".button2");
-const btn3 = document.querySelector(".button3");
+let btn1 = document.querySelector(".button1");
+let btn2 = document.querySelector(".button2");
+let btn3 = document.querySelector(".button3");
 
 btn1.onclick = GoStore;
 btn2.onclick = GoCave;
@@ -42,8 +42,8 @@ const locations = [
   {
     name: "magic dungeon",
     text: "You are at the dungeon. You see a dragon. What do you want to do?",
-    buttonsTexts: ["Fight the dragon", "Go to town"],
-    buttonsFunctions: [FightDragon, GoTown],
+    buttonsTexts: ["FightDarkMage", "Fight the dragon", "Go to town"],
+    buttonsFunctions: [FightDarkMage, FightDragon, GoTown],
   },
   {
     name: "fight",
@@ -60,13 +60,13 @@ const locations = [
   {
     name: "lose",
     text: "You have been defeated by the monster. Game over.",
-    buttonTexts: ["Start over"],
+    buttonsTexts: ["Start over"],
     buttonsFunctions: [StartOver],
   },
   {
     name: "win",
     text: "You have defeated the dragon. You have wined the game.",
-    buttonTexts: ["Start over"],
+    buttonsTexts: ["Start over"],
     buttonsFunctions: [StartOver],
   },
 ];
@@ -112,19 +112,38 @@ btnStart.addEventListener("click", () => {
 function changeLocation(location) {
   locationSelected = locations[location];
   messageContainer.innerHTML = locationSelected.text;
-  btn1.innetHTMl = locationSelected.buttonsTexts[0];
-  btn2.innetHTMl = locationSelected.buttonsTexts[1];
-  btn3.innetHTMl = locationSelected.buttonsTexts[2];
+  btn1.innerHTML = locationSelected.buttonsTexts[0];
+  btn2.innerHTML = locationSelected.buttonsTexts[1];
+  btn3.innerHTML = locationSelected.buttonsTexts[2];
   btn1.onclick = locationSelected.buttonsFunctions[0];
   btn2.onclick = locationSelected.buttonsFunctions[1];
   btn3.onclick = locationSelected.buttonsFunctions[2];
 }
 function GoStore() {
-  changeLocation(locations[0]);
+  changeLocation(0);
 }
 function GoCave() {
-  changeLocation(locations[1]);
+  changeLocation(1);
 }
 function GoExplore() {
-  changeLocation(locations[2]);
+  changeLocation(2);
 }
+function GoTown() {
+  changeLocation(0);
+}
+function GoForest() {
+  changeLocation(3);
+}
+function GoMagicDungeon() {
+  changeLocation(4);
+}
+function FightSlime() {}
+function FightFangedBest() {}
+function FightDragon() {}
+function FightDemon() {}
+function FightBear() {}
+function FightDarkMage() {}
+function Attack() {}
+function Dodge() {}
+function Run() {}
+function StartOver() {}
