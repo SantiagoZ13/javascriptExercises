@@ -1,38 +1,65 @@
-let triangleChar = " * ";
+let triangleChar = " # ";
 let triangleArray = [];
 let space = "   ";
-function createRectangleTriangle(colums) {
+let inverted = true;
+
+function generateLeftTriangle(colums) {
   let triangleCharCount = triangleChar;
-  console.log("Crenado triangulo");
   for (let i = 0; i < colums; i++) {
-    triangleArray.push(triangleCharCount);
-    console.log(triangleArray[i]);
+    if (inverted) {
+      triangleArray.unshift(triangleCharCount);
+    } else {
+      triangleArray.push(triangleCharCount);
+    }
     triangleCharCount = triangleCharCount + triangleChar;
   }
+  return triangleArray;
 }
-function createEquilateralTriangle(colums) {
+function generateRightTriangle(colums) {
   let triangleCharCount = triangleChar;
   let spaces = colums;
-  console.log("Crenado triangulo");
   for (let i = 0; i < colums; i++) {
     let spaceCount = space.repeat(spaces);
-    triangleArray.push(spaceCount + triangleCharCount);
-    console.log(triangleArray[i]);
+    if (inverted) {
+      triangleArray.unshift(spaceCount + triangleCharCount);
+    } else {
+      triangleArray.push(spaceCount + triangleCharCount);
+    }
+
     triangleCharCount = triangleCharCount + triangleChar;
     spaces--;
   }
+  return triangleArray;
 }
 
-function createTriangle(colums) {
-  let triangleCharCount = triangleChar;
-  let spaces = colums;
-  console.log("Crenado triangulo");
-  for (let i = 0; i < colums; i++) {
-    let spaceCount = space.repeat(spaces);
-    triangleArray.push(spaceCount + triangleCharCount);
+function generateTriangle(count) {
+  for (let i = 1; i <= count; i++) {
+    if (inverted) {
+      triangleArray.unshift(generateRow(i, count));
+    } else {
+      triangleArray.push(generateRow(i, count));
+    }
+  }
+  return triangleArray;
+}
 
-    console.log(triangleArray[i]);
-    triangleCharCount = triangleCharCount + space + triangleChar;
-    spaces--;
+function generateRow(rowNumber, rowCount) {
+  return (
+    space.repeat(rowCount - rowNumber) +
+    triangleChar.repeat(rowNumber * 2 - 1) +
+    space.repeat(rowCount - rowNumber)
+  );
+}
+
+let generatedTriangles = [];
+generatedTriangles.push(
+  generateRightTriangle(10),
+  generateLeftTriangle(10),
+  generateTriangle(10)
+);
+for (array of generatedTriangles) {
+  for (row of array) {
+    console.log(row);
   }
 }
+console.log(generatedTriangles);
