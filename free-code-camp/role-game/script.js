@@ -1,7 +1,7 @@
 let playerName = document.querySelector(".player-name");
 let playerClass = document.querySelector(".player-class");
 let health = 100;
-let gold = 50;
+let gold = 500;
 let xp = 0;
 let inventory = ["stick"];
 let currentWeaponIndex = 0;
@@ -151,7 +151,6 @@ const monsters = [
 ];
 
 function changeLocation(location) {
-  console.log(weapons);
   locationSelected = locations[location];
   messageContainer.innerText = locationSelected.text;
   btn1.innerText = locationSelected.buttonsTexts[0];
@@ -181,10 +180,42 @@ function GoMagicDungeon() {
 }
 
 function BuyWeapon() {
-  if (gold >= 30) {
-    currentWeaponIndex += 1;
+  if (currentWeaponIndex < weapons.length - 1) {
+    if (gold >= 30) {
+      gold -= 30;
+      currentWeaponIndex += 1;
+      goldText.innerText = gold;
+      let newWeapon = weapons[currentWeaponIndex].name;
+      inventory.push(newWeapon);
+      messageContainer.innerText =
+        "You bougth a " +
+        newWeapon +
+        ". In your inventory you have " +
+        inventory;
+    } else {
+      messageContainer.innerText =
+        "You don't have enough money to buy a new weapon";
+    }
+  } else {
+    messageContainer.innerText = "You already have the most powerfull weapon!";
+    btn1.innerText = "Sell weapon for 15 gold";
+    btn1.onclick = sellWeapon;
   }
 }
+
+const sellWeapon = () => {
+  if (currentWeaponIndex > 0) {
+    currentWeaponIndex--;
+    gold += 15;
+    goldText.innerText = gold;
+    let currentWeapon = inventory.pop();
+    messageContainer.innerText = "You have sold your " + currentWeapon;
+    messageContainer.innerText += ". In your inventory you have: " + inventory;
+  } else {
+    messageContainer.innerText = "Don't sell your only weapon";
+  }
+};
+
 function BuyHealth() {
   if (gold >= 10) {
     gold -= 10;
