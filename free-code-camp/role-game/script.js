@@ -5,12 +5,22 @@ let gold = 500;
 let xp = 0;
 let inventory = ["stick"];
 let currentWeaponIndex = 0;
+let fighting;
+let enemyName = document.querySelector(".enemy-name");
+let enemyHealth = document.querySelector(".enemy-health");
 
 const btnStart = document.querySelector(".btn-start");
 const xpText = document.querySelector(".xp-stat");
 const healthText = document.querySelector(".health-stat");
 const goldText = document.querySelector(".gold-stat");
-let weapons = [];
+const enemyStats = document.querySelector(".enemy-stats");
+
+let weapons = [
+  { name: "stick", power: 5 },
+  { name: "dagger", power: 30 },
+  { name: "sword", power: 50 },
+  { name: "sacred sword", power: 100 },
+];
 let messageContainer = document.querySelector(".message-container");
 const formContainer = document.querySelector(".form-stats-container");
 const gameContainer = document.querySelector(".game-container");
@@ -87,20 +97,20 @@ const locations = [
   {
     name: "forest",
     text: "You are at the forest. You see a bear. What do you want to do?",
-    buttonsTexts: ["Fight the bear", "Fight the demon", "Go to town"],
-    buttonsFunctions: [FightBear, FightDemon, GoTown],
+    buttonsTexts: ["Fight the bear", "Fight the wizard", "Go to town"],
+    buttonsFunctions: [FightBear, FightWizard, GoTown],
   },
   {
     name: "magic dungeon",
     text: "You are at the dungeon. You see a dragon. What do you want to do?",
-    buttonsTexts: ["FightDarkMage", "Fight the dragon", "Go to town"],
-    buttonsFunctions: [FightDarkMage, FightDragon, GoTown],
+    buttonsTexts: ["Fight the demon", "Fight the dragon", "Go to town"],
+    buttonsFunctions: [FightDemon, FightDragon, GoTown],
   },
   {
     name: "fight",
     text: "You are fighting the monster. What do you want to do?",
     buttonsTexts: ["Attack", "Dodge", "Run"],
-    buttonsFunctions: [Attack, Dodge, Run],
+    buttonsFunctions: [Attack, Dodge, GoTown],
   },
   {
     name: "moster killed",
@@ -124,33 +134,39 @@ const locations = [
 
 const monsters = [
   {
-    name: "slime",
+    name: "Slime",
     damage: 2,
     health: 15,
   },
   {
-    name: "bear",
+    name: "Fanged Beast",
     damage: 4,
-    health: 20,
+    health: 25,
   },
   {
-    name: "fanged beast",
+    name: "Bear",
     damage: 8,
     health: 40,
   },
   {
-    name: "fear demon",
-    damage: 16,
-    health: 80,
+    name: "Dark Wizard",
+    damage: 10,
+    health: 60,
   },
   {
-    name: "dragon",
+    name: "Fear Demon",
+    damage: 20,
+    health: 90,
+  },
+  {
+    name: "Dragon",
     damage: 28,
     health: 300,
   },
 ];
 
 function changeLocation(location) {
+  enemyStats.style.display = "none";
   locationSelected = locations[location];
   messageContainer.innerText = locationSelected.text;
   btn1.innerText = locationSelected.buttonsTexts[0];
@@ -228,12 +244,38 @@ function BuyHealth() {
   }
 }
 
-function FightSlime() {}
-function FightFangedBest() {}
-function FightDragon() {}
-function FightDemon() {}
-function FightBear() {}
-function FightDarkMage() {}
+function goFight() {
+  changeLocation(6);
+  enemyStats.style.display = "flex";
+  enemyName.innerText = monsters[fighting].name;
+  enemyHealth.innerText = monsters[fighting].health;
+}
+
+function FightSlime() {
+  fighting = 0;
+  goFight();
+}
+
+function FightFangedBest() {
+  fighting = 1;
+  goFight();
+}
+function FightDragon() {
+  fighting = 5;
+  goFight();
+}
+function FightDemon() {
+  fighting = 4;
+  goFight();
+}
+function FightBear() {
+  fighting = 2;
+  goFight();
+}
+function FightWizard() {
+  fighting = 3;
+  goFight();
+}
 function Attack() {}
 function Dodge() {}
 function Run() {}
