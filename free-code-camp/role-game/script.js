@@ -1,13 +1,15 @@
 let playerName = document.querySelector(".player-name");
 let playerClass = document.querySelector(".player-class");
 let health = 100;
-let gold = 500;
+let gold = 50;
 let xp = 0;
 let inventory = ["stick"];
 let currentWeaponIndex = 0;
 let fighting;
-let enemyName = document.querySelector(".enemy-name");
-let enemyHealth = document.querySelector(".enemy-health");
+let enemyHealth;
+
+let enemyNameText = document.querySelector(".enemy-name");
+let enemyHealthText = document.querySelector(".enemy-health");
 
 const btnStart = document.querySelector(".btn-start");
 const xpText = document.querySelector(".xp-stat");
@@ -15,12 +17,6 @@ const healthText = document.querySelector(".health-stat");
 const goldText = document.querySelector(".gold-stat");
 const enemyStats = document.querySelector(".enemy-stats");
 
-let weapons = [
-  { name: "stick", power: 5 },
-  { name: "dagger", power: 30 },
-  { name: "sword", power: 50 },
-  { name: "sacred sword", power: 100 },
-];
 let messageContainer = document.querySelector(".message-container");
 const formContainer = document.querySelector(".form-stats-container");
 const gameContainer = document.querySelector(".game-container");
@@ -115,52 +111,52 @@ const locations = [
   {
     name: "moster killed",
     text: "You have defeted the moster. You gain experience points and find gold.",
-    buttonsTexts: ["Go to town", "Go to explore"],
-    buttonsFunctions: [GoTown, GoExplore],
+    buttonsTexts: ["Go to town", "Go to explore", "Go to store"],
+    buttonsFunctions: [GoTown, GoExplore, GoStore],
   },
   {
     name: "lose",
     text: "You have been defeated by the monster. Game over.",
-    buttonsTexts: ["Start over"],
-    buttonsFunctions: [StartOver],
+    buttonsTexts: ["Start over", "Start over", "Start over"],
+    buttonsFunctions: [StartOver, StartOver, StartOver],
   },
   {
     name: "win",
     text: "You have defeated the dragon. You have wined the game.",
-    buttonsTexts: ["Start over"],
-    buttonsFunctions: [StartOver],
+    buttonsTexts: ["Start over", "Start over", "Start over"],
+    buttonsFunctions: [StartOver, StartOver, StartOver],
   },
 ];
 
 const monsters = [
   {
     name: "Slime",
-    damage: 2,
+    power: 2,
     health: 15,
   },
   {
     name: "Fanged Beast",
-    damage: 4,
+    power: 4,
     health: 25,
   },
   {
     name: "Bear",
-    damage: 8,
+    power: 8,
     health: 40,
   },
   {
     name: "Dark Wizard",
-    damage: 10,
+    power: 10,
     health: 60,
   },
   {
     name: "Fear Demon",
-    damage: 20,
+    power: 20,
     health: 90,
   },
   {
     name: "Dragon",
-    damage: 28,
+    power: 28,
     health: 300,
   },
 ];
@@ -246,9 +242,10 @@ function BuyHealth() {
 
 function goFight() {
   changeLocation(6);
+  enemyHealth = monsters[fighting].health;
   enemyStats.style.display = "flex";
-  enemyName.innerText = monsters[fighting].name;
-  enemyHealth.innerText = monsters[fighting].health;
+  enemyNameText.innerText = monsters[fighting].name;
+  enemyHealthText.innerText = enemyHealth;
 }
 
 function FightSlime() {
@@ -276,7 +273,59 @@ function FightWizard() {
   fighting = 3;
   goFight();
 }
-function Attack() {}
-function Dodge() {}
-function Run() {}
-function StartOver() {}
+function Attack() {
+  messageContainer.innerText = "The " + monsters[fighting].name + " attacks. ";
+  messageContainer.innerText +=
+    "You attack it with your " + weapons[currentWeaponIndex].name + ".";
+
+  health -= getEnemyAttackValue(monsters[fighting].power);
+
+  enemyHealth -=
+    weapons[currentWeaponIndex].power + Math.floor(Math.random() * xp) + 1;
+  enemyHealthText.innerText = enemyHealth;
+  healthText.innerText = health;
+  if (health <= 0) {
+    lose();
+  } else if (enemyHealth <= 0) {
+    if (fighting == 5) {
+      winGame();
+    } else {
+      defeatMonster();
+    }
+  }
+}
+function getEnemyAttackValue(power) {
+  const hit = power * 5 - Math.floor(Math.random() * xp);
+  console.log(hit);
+  return hit > 0 ? hit : 0;
+}
+
+function defeatMonster() {
+  gold += Math.floor(monsters[fighting].power * 6.7);
+  xp += monsters[fighting].power;
+  goldText.innerText = gold;
+  xpText.innerText = xp;
+  changeLocation(7);
+}
+function Dodge() {
+  messageContainer.innerText =
+    "You dodged the attack from the " + monsters[fighting].name;
+}
+function lose() {
+  changeLocation(8);
+}
+function winGame() {
+  changeLocation(9);
+}
+function StartOver() {
+  xp = 0;
+  health = 0;
+  gold = 50;
+  currentWeaponIndex = 0;
+  inventory = ["stick"];
+  goldText.innerText = gold;
+  healthText.innerText = health;
+  xpText.innerText = xp;
+  formContainer.style.display = "flex";
+  gameContainer.style.display = "none";
+}

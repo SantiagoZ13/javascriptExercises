@@ -79,7 +79,7 @@ button {
 /* Game container*/
 .game-container {
   display: flex;
-  /* display: none; */
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   padding: 20px 20px;
