@@ -279,9 +279,13 @@ function Attack() {
     "You attack it with your " + weapons[currentWeaponIndex].name + ".";
 
   health -= getEnemyAttackValue(monsters[fighting].power);
-
-  enemyHealth -=
-    weapons[currentWeaponIndex].power + Math.floor(Math.random() * xp) + 1;
+  if (isMonsterHit()) {
+    enemyHealth -=
+      weapons[currentWeaponIndex].power + Math.floor(Math.random() * xp) + 1;
+  } else {
+    messageContainer.innerText =
+      "You have missed your attack or you are badly injured";
+  }
   enemyHealthText.innerText = enemyHealth;
   healthText.innerText = health;
   if (health <= 0) {
@@ -293,10 +297,16 @@ function Attack() {
       defeatMonster();
     }
   }
+  if (Math.random <= 0.1 && inventory.length !== 1) {
+    messageContainer.innerText = "Your " + inventory.pop() + " breaks.";
+    currentWeaponIndex--;
+  }
+}
+function isMonsterHit() {
+  return Math.random() > 0.2 || health < 20;
 }
 function getEnemyAttackValue(power) {
   const hit = power * 5 - Math.floor(Math.random() * xp);
-  console.log(hit);
   return hit > 0 ? hit : 0;
 }
 
