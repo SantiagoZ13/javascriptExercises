@@ -329,7 +329,7 @@ function winGame() {
 }
 function StartOver() {
   xp = 0;
-  health = 0;
+  health = 100;
   gold = 50;
   currentWeaponIndex = 0;
   inventory = ["stick"];
@@ -338,4 +338,5 @@ function StartOver() {
   xpText.innerText = xp;
   formContainer.style.display = "flex";
   gameContainer.style.display = "none";
+  changeLocation(0);
 }
