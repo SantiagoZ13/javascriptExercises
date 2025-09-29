@@ -11,8 +11,6 @@ body {
   align-items: center;
   gap: 40px;
   align-items: center;
-  width: 100%;
-  height: 100vh;
   background-image: linear-gradient(
     45deg,
     rgb(88, 88, 88) 8%,
@@ -22,13 +20,15 @@ body {
 
 /* Settings icon*/
 .settings-button {
-  width: 64px;
+  width: 100%;
   place-self: flex-end;
   cursor: pointer;
-  margin-right: 64px;
+  display: flex;
+  flex-direction: row-reverse;
 }
 .settings-button img {
-  width: 100%;
+  width: 64px;
+  margin: 64px;
 }
 /* Form player name and class */
 .form-stats-container {
