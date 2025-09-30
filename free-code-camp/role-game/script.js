@@ -16,6 +16,21 @@ const xpText = document.querySelector(".xp-stat");
 const healthText = document.querySelector(".health-stat");
 const goldText = document.querySelector(".gold-stat");
 const enemyStats = document.querySelector(".enemy-stats");
+const body = document.querySelector("body");
+const resetBtn = document.querySelector(".reset");
+const changeColorBtn = document.querySelector(".change-color");
+const colors = [
+  "linear-gradient( 45deg,rgb(253, 0, 0) 8%,rgb(0, 0, 0) 70%)",
+  "linear-gradient( 45deg,rgb(145, 5, 5) 8%,rgb(0, 0, 0) 70%)",
+  "linear-gradient( 45deg,rgb(88, 88, 88) 8%,rgb(0, 0, 0) 70%)",
+  "linear-gradient( 45deg,rgb(44, 197, 5) 8%,rgb(0, 0, 0) 70%)",
+  "linear-gradient( 45deg,rgb(0, 89, 255) 8%,rgb(0, 0, 0) 70%)",
+  "linear-gradient( 45deg,rgb(154, 2, 255) 8%,rgb(0, 0, 0) 70%)",
+  "linear-gradient( 45deg,rgb(255, 0, 212) 8%,rgb(0, 0, 0) 70%)",
+  "linear-gradient( 45deg,rgb(255, 196, 0) 8%,rgb(0, 0, 0) 70%)",
+  "linear-gradient( 45deg,rgb(43, 152, 202) 8%,rgb(0, 0, 0) 70%)",
+  "linear-gradient( 45deg,rgb(0, 68, 255) 8%,rgb(0, 0, 0) 70%)",
+];
 
 let messageContainer = document.querySelector(".message-container");
 const formContainer = document.querySelector(".form-stats-container");
@@ -24,6 +39,7 @@ const gameContainer = document.querySelector(".game-container");
 let btn1 = document.querySelector(".button1");
 let btn2 = document.querySelector(".button2");
 let btn3 = document.querySelector(".button3");
+changeColorBtn.onclick = changeColor;
 
 btnStart.addEventListener("click", () => {
   if (playerName.value === "" || playerClass.value === "") {
@@ -60,6 +76,7 @@ btnStart.addEventListener("click", () => {
 btn1.onclick = GoStore;
 btn2.onclick = GoCave;
 btn3.onclick = GoExplore;
+resetBtn.onclick = StartOver;
 
 const locations = [
   {
@@ -339,4 +356,14 @@ function StartOver() {
   formContainer.style.display = "flex";
   gameContainer.style.display = "none";
   changeLocation(0);
+  messageContainer.innerText =
+    "Welcome to Hunter Dragon. You must defeat the dragon that is preventing people from leaving the town";
+}
+function changeColor() {
+  let color = generateRandomColor();
+  body.style.backgroundImage = colors[color];
+}
+function generateRandomColor() {
+  let indexRandom = Math.floor(Math.random() * colors.length);
+  return indexRandom;
 }
