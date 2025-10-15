@@ -22,7 +22,7 @@ const changeColorBtn = document.querySelector(".change-color");
 const colors = [
   "linear-gradient( 45deg,rgb(253, 0, 0) 8%,rgb(0, 0, 0) 70%)",
   "linear-gradient( 45deg,rgb(145, 5, 5) 8%,rgb(0, 0, 0) 70%)",
-  "linear-gradient( 45deg,rgb(88, 88, 88) 8%,rgb(0, 0, 0) 70%)",
+  "linear-gradient( 45deg,rgb(255, 0, 0) 8%,rgb(0, 0, 0) 70%)",
   "linear-gradient( 45deg,rgb(44, 197, 5) 8%,rgb(0, 0, 0) 70%)",
   "linear-gradient( 45deg,rgb(0, 89, 255) 8%,rgb(0, 0, 0) 70%)",
   "linear-gradient( 45deg,rgb(154, 2, 255) 8%,rgb(0, 0, 0) 70%)",
