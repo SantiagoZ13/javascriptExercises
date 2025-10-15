@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: rgb(30, 29, 46);
+  margin: 20px 100px;
+}
+h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+  color: #b0b8ff;
+}
+input,
+button,
+select {
+  font-size: 16px;
+}
+legend,
+label {
+  color: #b0b8ff;
+  font-size: 20px;
+  font-weight: 600;
+}
+.container form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  fieldset {
+    min-height: 60px;
+    border: solid 2px #b0b8ff;
+  }
+  input,
+  select,
+  button {
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ffffff;
+    color: #645c5c;
+  }
+  button {
+    cursor: pointer;
+  }
+}
