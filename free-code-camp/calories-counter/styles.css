@@ -4,13 +4,13 @@
   padding: 0;
 }
 body {
-  background-color: rgb(30, 29, 46);
+  background-color: rgb(27, 29, 53);
   margin: 20px 100px;
 }
 h1 {
   font-size: 40px;
   margin-bottom: 20px;
-  color: #b0b8ff;
+  color: #b0ffca;
 }
 input,
 button,
@@ -19,7 +19,7 @@ select {
 }
 legend,
 label {
-  color: #b0b8ff;
+  color: #b0ffca;
   font-size: 20px;
   font-weight: 600;
 }
@@ -30,7 +30,7 @@ label {
 
   fieldset {
     min-height: 60px;
-    border: solid 2px #b0b8ff;
+    border: solid 2px #b0ffca;
   }
   input,
   select,
@@ -39,9 +39,45 @@ label {
     border-radius: 8px;
     border: none;
     background-color: #ffffff;
-    color: #645c5c;
+    color: #4c4e4c;
   }
   button {
     cursor: pointer;
   }
+  fieldset input {
+    width: 100%;
+  }
+  fieldset {
+    padding: 20px;
+    border-radius: 16px;
+  }
+}
+.output {
+  margin: 20px;
+  padding: 16px;
+  text-align: center;
+  border: solid 2px #b0ffca;
+
+  span {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  p {
+    color: #b0ffca;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 4px 0;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.surplus {
+  color: #ff6a6a;
+}
+
+.deficit {
+  color: #6dff99;
 }
